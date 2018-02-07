@@ -1,0 +1,31 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: phpldapadmin-deployment
+  labels:
+    app: phpldapadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpldapadmin
+  template:
+    metadata:
+      labels:
+        app: phpldapadmin
+    spec:
+      containers:
+        - name: phpldapadmin
+          image: osixia/phpldapadmin:0.7.1
+          volumeMounts:
+            - name: phpldapadmin-certs
+              mountPath: /container/service/phpldapadmin/assets/apache2/certs
+            - name: ldap-client-certs
+              mountPath: /container/service/ldap-client/assets/certs
+          ports:
+            - containerPort: 443
+      volumes:
+        - name: phpldapadmin-certs
+          emptyDir: {}
+        - name: ldap-client-certs
+          emptyDir: {}

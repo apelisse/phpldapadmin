@@ -1,0 +1,8 @@
+apiVersion: manifest.k8s.io/v1alpha1
+kind: Manifest
+metadata:
+  name: phpldapadmin
+description: phpldapadmin Deployment.
+resources:
+- deployment.yaml
+- service.yaml
